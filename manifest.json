@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Tildes Polka Typewriter",
+  "version": "1.0.0",
+  "description": "Plays looping Creative Commons polka music while you type a post or comment on tildes.net. Pauses shortly after you stop.",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://tildes.net/*", "https://*.tildes.net/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["audio/polka.mp3"],
+      "matches": ["https://tildes.net/*", "https://*.tildes.net/*"]
+    }
+  ]
+}
