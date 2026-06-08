@@ -32,13 +32,34 @@
     return false;
   }
 
+  // Issue #1 asked to unmute and raise the *system* volume when it's muted or
+  // below 30%. A content script can't touch the OS mixer, and can't even call
+  // chrome.runtime.connectNative (that's background-only). So when playback
+  // begins we hand the request to the service worker, which relays it to a
+  // native messaging host that runs `wpctl`. It's opt-in: the worker no-ops
+  // unless the user ticked the checkbox in the popup, so we always send and let
+  // the worker decide. We only ask once per playback (re)start to avoid firing
+  // on every keystroke.
+  function requestOsVolume() {
+    try {
+      chrome.runtime.sendMessage({ type: "ensureOsVolume" }, () => {
+        // Swallow lastError: worker disabled, host missing, etc. are all fine.
+        void chrome.runtime.lastError;
+      });
+    } catch (_) {
+      // Extension context invalidated (e.g. reload). Nothing to do.
+    }
+  }
+
   function startOrResume() {
     const a = getAudio();
     if (a.paused) {
       // play() returns a promise that rejects if autoplay is blocked; ignore
       // the rejection so a blocked first attempt doesn't throw. The next
       // keystroke (still within a gesture) will try again.
-      a.play().catch(() => {});
+      a.play()
+        .then(requestOsVolume)
+        .catch(() => {});
     }
   }
 

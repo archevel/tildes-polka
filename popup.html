@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font: 13px/1.4 system-ui, sans-serif;
+        margin: 0;
+        padding: 12px 14px;
+        width: 260px;
+        color: #1a1a1a;
+      }
+      h1 {
+        font-size: 13px;
+        margin: 0 0 8px;
+      }
+      label {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        cursor: pointer;
+      }
+      .hint {
+        color: #666;
+        margin: 6px 0 0 24px;
+        font-size: 11px;
+      }
+      button {
+        margin-top: 10px;
+        font: inherit;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      #status {
+        margin-top: 8px;
+        font-size: 11px;
+        min-height: 14px;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      #status.ok {
+        color: #137333;
+      }
+      #status.err {
+        color: #c5221f;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tildes Polka Typewriter</h1>
+    <label>
+      <input type="checkbox" id="osVolume" />
+      <span>Raise system volume when the polka plays</span>
+    </label>
+    <div class="hint">
+      If the system is muted or below 30%, unmute and set it to 50%. Requires the
+      native host to be installed (see native-host/install.sh). Linux + PipeWire
+      only.
+    </div>
+    <button id="test">Test native host</button>
+    <div id="status"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>

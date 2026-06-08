@@ -1,11 +1,24 @@
 {
   "manifest_version": 3,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoxYxpxgTMSf5+ZQaPV17bLoWmHYsflTrq9+tCjO8RDBkl02ze4uZ94M0YRcHCacRLo9SlySkIZqTFJtwTqbscE7nI9idG/zkzvFneg3UVHOjEjtefubqjeTm4hl0M2e+LFx7GpKkoxzB83GAGEW8cDYUI77Rkhj1lWRTnGdxv+IRYcASw8LSXoRBPuWe39zrHgZFefxenji60n4dfd5LVbtgofltsW3W6mj423tIVfaZP8vUUcYqPu+9Sg+Fkhdpp0cn2R6vslsqTRThrqG7zvcQpx4UbGz2mbYJbSvKuR/pPeIH6SvEt6h+0RR9TSb6WYxx1ikmea1/fsFIxEsSLwIDAQAB",
   "name": "Tildes Polka Typewriter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Plays looping Creative Commons polka music while you type a post or comment on tildes.net. Pauses shortly after you stop.",
   "icons": {
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
+  },
+  "permissions": ["storage", "nativeMessaging"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Tildes Polka Typewriter",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "content_scripts": [
     {
